@@ -1,0 +1,13 @@
+require("./getDB")().then(db=>{
+  db.createCollection(
+    "cappedFromNode",{capped:true,size:10000,max:5}
+  )
+  .then(coll=>{
+    console.dir(coll);
+    db.close();
+  })
+  .catch(err=>{
+    console.log(err);
+    db.close();
+  });
+})

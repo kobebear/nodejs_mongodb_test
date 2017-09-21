@@ -1,0 +1,8 @@
+{
+  "name": "nodejs_mongodb_test",
+  "version": "0.0.1",
+  "dependencies": {
+    "mongodb": "^2.2.31",
+    "mongoose": "^4.11.12"
+  }
+}
