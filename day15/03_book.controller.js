@@ -1,11 +1,10 @@
 var mongoose=require("mongoose");
 require("./02_book.model");
-require("./mongoose.js");
 var Book=mongoose.model("Book");
 
 var book1=new Book({
-  bookName:"JavaScript权威指南",
-  author:{authorName:"David", school:"MIT"},
+  title:"JavaScript权威指南",
+  author:{name:"David", school:"MIT"},
   publisher:"O'Reilly",
   pages:1004,
   kwords:["javascript","web","前端","犀牛"],
@@ -20,11 +19,21 @@ var book1=new Book({
     }
   ]
 });
-//将文档保存到数据库的集合中:
-book1.save()
-  // .then(Book.find)//查询集合中的文档
-  // .then(books=>console.log(books))//输出查询结果
-  .catch(err=>{
-    console.log(err);
-    mongoose.disconnect();
+
+require("./mongoose")()
+  .then(db=>{
+    book1.save()
+      .then(book=>{//save()返回刚保存的文档
+        console.log(book.toString());
+        return Book.find();//Book模型提供了查询的功能
+      })
+      .then(books=>{
+        //mongoose中Book模型的find不返回游标，而是返回结果集合
+        console.log(books);
+        mongoose.disconnect();
+      })
+      .catch(err=>{
+        console.log(err);
+        mongoose.disconnect();
+      });
   })

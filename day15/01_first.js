@@ -1,7 +1,7 @@
 require("./mongoose")()
-  .then(mongoose=>{
+  .then(db=>{
     console.log("We are connected!");
-    mongoose.disconnect();
+    db.close();
   })
 // var mongoose=require("mongoose");
 // mongoose.Promise=global.Promise;
