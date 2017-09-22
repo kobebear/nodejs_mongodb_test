@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema=mongoose.Schema;
 
 var BookSchema=new Schema({
-  title:{type:String,index:1, required:true, unique:true},
+  title:String,
   author:{name:String,school:String},
   publisher:String,
   publicationDate:{type:Date,default:Date.now},
